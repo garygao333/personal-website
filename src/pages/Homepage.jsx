@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ChatBot from 'react-simple-chatbot';
-import '../chatbot.css'; // Ensure this path is correct
+import '../chatbot.css';
 
 class Answer extends React.Component {
   state = {
@@ -14,9 +14,11 @@ class Answer extends React.Component {
     this.fetchAnswer(this.props.steps['ask-question'].value);
   }
 
+
   fetchAnswer = async (question) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/openai', { question });
+      const response = await axios.post('http://localhost:3000/api/openai', { question });
+      console.log("owdijqwoidjweoifowoeijd", question)
       this.setState({ answer: response.data.answer, loading: false });
     } catch (error) {
       console.error('Error fetching answer:', error);
