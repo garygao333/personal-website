@@ -16,6 +16,18 @@ html, body {
   background-color: #F6EEE3; /* Purple background for the whole page */
 }
 
+.app-container-1 {
+  display: flex;
+  flex-direction: column;  /* Aligns children vertically */
+  align-items: center;     /* Centers content horizontally */
+  justify-content: flex-start; /* Aligns content to the top */
+  background-color: #F6EEE3;
+  overflow-y: auto;        /* Enables vertical scrolling */
+  height: 100vh;           /* Set the height to the full viewport height */
+  padding: 20px;           /* Adds some padding around the content */
+  box-sizing: border-box;  /* Ensures padding is included in the height calculation */
+}
+
 .text-content h1 {
   font-size: 2em; /* Adjust size as necessary */
   font-weight: bold;
@@ -26,6 +38,19 @@ html, body {
   font-size: 1.2em; /* Adjust size as necessary */
   font-style: italic;
   margin: 20px 0; /* Adjust space as necessary */
+  max-width: 50vw; 
+}
+
+.text-content .details-2 {
+  font-size: 1.2em; /* Adjust size as necessary */
+  margin: 20px 0; /* Adjust space as necessary */
+  max-width: 50vw; 
+}
+
+.text-content h2 {
+  font-size: 1.3em; /* Adjust size as necessary */
+  font-weight: bold;
+  color: black;
 }
 
 .text-content .contact-info {
