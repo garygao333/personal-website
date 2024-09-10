@@ -1,41 +1,47 @@
-import express from "express";
-import bodyParser from "body-parser";
-import OpenAI from "openai";
-import dotenv from "dotenv";
-import CORS from "cors";
-// Initialize environment variables
+const express = require('express');
+const axios = require('axios');
+const dotenv = require('dotenv');
+
 dotenv.config();
 
 const app = express();
-app.use(bodyParser.json());
-app.use(CORS());
+const port = process.env.PORT || 3000;
 
-const openai = new OpenAI({
-  apiKey: "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",
-});
+// Middleware to parse JSON bodies
+app.use(express.json());
 
-app.post("/chat", async (req, res) => {
-  const { messageContent } = req.body;
-
-  try {
-    const completion = await openai.chat.completions.create({
-      messages: [
-        { role: "system", content: "You are a helpful assistant." },
-        { role: "user", content: messageContent },
-      ],
-      model: "gpt-3.5-turbo-1106",
-    });
-
-    let response = completion.choices[0];
-
-    res.send(response);
-  } catch (error) {
-    console.error("Error in /chat endpoint:", error);
-    res.status(500).send("Error handling chat request");
+// OpenAI API setup
+const openaiApi = axios.create({
+  baseURL: 'https://api.openai.com/v1',
+  headers: {
+    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+    'Content-Type': 'application/json',
   }
 });
 
-const PORT = 5001;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+// Chat route
+app.post('/api/openai', async (req, res) => {
+  const { question } = req.body;
+  if (!question) {
+    return res.status(400).json({ error: 'No prompt provided' });
+  }
+
+  try {
+    const response = await openaiApi.post('/chat/completions', {
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: question }]
+    });
+
+    const message = response.data.choices[0].message.content;
+    // res.json({ response: message });
+    res.json({ answer: message });
+  } catch (error) {
+    console.error('Error calling OpenAI:', error);
+    res.status(500).json({ error: 'Failed to fetch response from OpenAI' });
+  }
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
