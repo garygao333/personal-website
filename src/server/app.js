@@ -6,6 +6,8 @@ console.log("hello")
 
 dotenv.config();
 
+console.log("API Key:", process.env.OPENAI_API_KEY);
+
 const app = express();
 const port = process.env.PORT || 3000;
 app.use((req, res, next) => {
@@ -21,7 +23,8 @@ app.use(express.json());
 const openaiApi = axios.create({
   baseURL: 'https://api.openai.com/v1',
   headers: {
-    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+    // 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+    'Authorization': 'Bearer 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',
     'Content-Type': 'application/json',
   }
 });
