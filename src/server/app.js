@@ -27,7 +27,6 @@ const openaiApi = axios.create({
   baseURL: 'https://api.openai.com/v1',
   headers: {
     'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-    // 'Authorization': 'Bearer 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',
     'Content-Type': 'application/json',
   }
 });
