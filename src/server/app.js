@@ -44,7 +44,7 @@ app.post('/api/openai', async (req, res) => {
     // res.json({ response: message });
     res.json({ answer: message });
   } catch (error) {
-    console.error('Error calling OpenAI:', error);
+    console.error(error.response.data);
     res.status(500).json({ error: 'Failed to fetch response from OpenAI' });
   }
 });

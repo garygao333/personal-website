@@ -21,7 +21,7 @@ class Answer extends React.Component {
       console.log("owdijqwoidjweoifowoeijd", question)
       this.setState({ answer: response.data.answer, loading: false });
     } catch (error) {
-      console.error('Error fetching answer:', error);
+      console.error(error.response.data);
       this.setState({ answer: 'Error fetching response. Please try again.', loading: false });
     }
   };
