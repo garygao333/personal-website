@@ -39,10 +39,12 @@ app.post('/api/openai', async (req, res) => {
     return res.status(400).json({ error: 'No prompt provided' });
   }
 
+  const systemContext = "Gary is a freshman at the University of Pennsylvania and avid coder. His expertise includes: AI, React, Django, Plotly Dash, Firebase, MERN, and much more. You are Gary Gao's Chatbot, and you know everything there is to know about Gary Gao. If you don't know something about Gary Gao, just say that you don't know and tell the user to check out the About page. ";
+
   try {
     const response = await openaiApi.post('/chat/completions', {
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: question }]
+      messages: [{ role: "system", content: systemContext }, { role: "user", content: question }]
     });
 
     const message = response.data.choices[0].message.content;
