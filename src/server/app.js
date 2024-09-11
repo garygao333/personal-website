@@ -1,10 +1,13 @@
 const express = require('express');
 const axios = require('axios');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv')
 
 console.log("hello")
 
-dotenv.config();
+// dotenv.config();
+
+const path = require('path')
+require('dotenv').config({ path: require('find-config')('.env') })
 
 console.log("API Key:", process.env.OPENAI_API_KEY);
 
@@ -23,8 +26,8 @@ app.use(express.json());
 const openaiApi = axios.create({
   baseURL: 'https://api.openai.com/v1',
   headers: {
-    // 'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-    'Authorization': 'Bearer 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',
+    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+    // 'Authorization': 'Bearer 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',
     'Content-Type': 'application/json',
   }
 });
