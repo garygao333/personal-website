@@ -14,10 +14,10 @@ class Answer extends React.Component {
     this.fetchAnswer(this.props.steps['ask-question'].value);
   }
 
-
   fetchAnswer = async (question) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/openai', { question });
+      // const response = await axios.post('http://localhost:3000/api/openai', { question });
+      const response = await axios.post('hhttps://garyzgao.com/api/openai', { question });
       console.log("owdijqwoidjweoifowoeijd", question)
       this.setState({ answer: response.data.answer, loading: false });
     } catch (error) {

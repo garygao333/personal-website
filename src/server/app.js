@@ -12,6 +12,7 @@ require('dotenv').config({ path: require('find-config')('.env') })
 console.log("API Key:", process.env.OPENAI_API_KEY);
 
 const app = express();
+
 const port = process.env.PORT || 3000;
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -56,7 +57,6 @@ app.post('/api/openai', async (req, res) => {
   }
 });
 
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
